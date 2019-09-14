@@ -29,3 +29,43 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## My notes
+
+Tutorial: https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app
+
+* sub msft
+* rg  k8sRG
+* acr acrdemo4b
+
+### Create ACR
+
+    az group create -n k8sRG -l eastus
+
+    az acr create -g k8sRG -n acrdemo4blizz --sku Basic
+
+### Log in to the container registry
+
+    az acr login -n acrdemo4blizz
+
+### Tag a container image (on local machine)
+
+    docker images
+
+    az acr list -g k8sRG --query "[].{acrLoginServer:loginServer}" --output table
+
+    docker tag azure-vote-front acrdemo4blizz.azurecr.io/azure-vote-front:v1
+
+### Push images to registry
+
+This takes a few minutes
+
+    docker push acrdemo4blizz.azurecr.io/azure-vote-front:v1
+
+### List images in registry
+
+    az acr repository list -n acrdemo4blizz -o table
+
+See tags for a specific image
+
+    az acr repository show-tags -n acrdemo4blizz --repository azure-vote-front -o table
