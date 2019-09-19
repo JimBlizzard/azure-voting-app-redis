@@ -112,7 +112,7 @@ Note: To ensure your cluster operates reliably, you should run at least 2 nodes.
 
 This command takes several minutes. While it runs, it simply displays "Running..." Be patient. If you get impatient and Ctrl+C the command, it contines to run in the background in Azure. You can check to see if it finished by running
 
-    az aks list
+    az aks list --output table
 
 Be patient.
 
@@ -191,7 +191,7 @@ Kubernetes supports horizontal pod autoscaling <https://kubernetes.io/docs/tasks
 
     az aks show -g aks01rg --name blizzaksdemo01 --query kubernetesVersion
 
-If your AKS closter is less than 1.10, you can clone the metrics-server GitHub repo and install the example definitions.
+If your AKS cluster is less than 1.10, you can clone the metrics-server GitHub repo and install the example definitions.
 
     git clone https://github.com/kubernetes-incubator/metrics-server.git
     kubectl create -f metrics-server/deploy/1.8+/
